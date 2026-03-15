@@ -43,7 +43,7 @@ class Goat {
 
     // print func
     void print() {
-        cout << name << " (" << color << ", " << age << ")" << endl; 
+        cout << "   " << name << " (" << color << ", " << age << ")" << endl; 
     }
 };
 
@@ -69,8 +69,8 @@ public:
     // constructor
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
-    void push_back(Goat new_goat) {
-        Node* newNode = new Node(new_goat);
+    void push_back(Goat newGoat) {
+        Node* newNode = new Node(newGoat);
         if (!tail)  // if there's no tail, the list is empty
             head = tail = newNode;
         else {
@@ -80,8 +80,8 @@ public:
         }
     }
 
-    void push_front(Goat new_goat) {
-        Node* newNode = new Node(new_goat);
+    void push_front(Goat newGoat) {
+        Node* newNode = new Node(newGoat);
         if (!head)  // if there's no head, the list is empty
             head = tail = newNode;
         else {
@@ -91,13 +91,13 @@ public:
         }
     }
 
-    void insert_after(Goat new_goat, int position) {
+    void insert_after(Goat newGoat, int position) {
         if (position < 0) { // input check
             cout << "Position must be >= 0." << endl;
             return;
         }
 
-        Node* newNode = new Node(new_goat);
+        Node* newNode = new Node(newGoat);
         if (!head) { 
             head = tail = newNode;
             return;
@@ -191,16 +191,15 @@ int main() {
         Goat randomGoat;
         list.push_back(randomGoat);
     }
-    cout << "List forward: ";
+    cout << "List forward: " << endl;
     list.print();
 
-    cout << "List backward: ";
+    cout << "List backward: " << endl;
     list.print_reverse();
 
-    cout << "Deleting list, then trying to print.\n";
-    list.~DoublyLinkedList();
-    cout << "List forward: ";
-    list.print();
-
+    // Demonstrate empty list behavior
+    DoublyLinkedList emptyList;
+    emptyList.print();
+    emptyList.print_reverse();
     return 0;
 }
