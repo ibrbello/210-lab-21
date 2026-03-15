@@ -3,16 +3,37 @@
 using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
+const int SIZE_ARR = 15, MIN_AGE = 1, MAX_AGE = 20;
 
 // Step 1: Goat class
 
 class Goat {
     // private member variables: age, name, color, name[], colors[]
-    int age;
-    string name;
-    string color;
-    string names[15] = {"Liam", "Ava", "Noah", "Sophia", "Ethan", "Maya", "Lucas",
-         "Zara", "Omar", "Layla", "Caleb", "Nina", "Isaac", "Amira", "Leo"};    string colors[15];
+    private:
+        int age;
+        string name;
+        string color;
+        string names[SIZE_ARR] = {"Liam", "Ava", "Noah", "Sophia", 
+            "Ethan", "Maya", "Lucas", "Zara", "Omar", "Layla", 
+            "Caleb", "Nina", "Isaac", "Amira", "Leo"};
+        string colors[SIZE_ARR] = {"Red", "Blue", "Green", "Yellow", "Purple",
+                "Orange", "Black", "White", "Gray", "Brown",
+                "Pink", "Teal", "Gold", "Silver", "Maroon"};
+    public:
+    // Constructors
+    Goat() {
+        age = rand() % (MAX_AGE-MIN_AGE+1) + MIN_AGE;
+        name = names[rand() % SIZE_ARR];
+        color = colors[rand() % SIZE_ARR];
+    }
+    Goat(int a, string c, string n) { age = a; color = c; name = n;}
+
+    // Getters & Setters
+    void setAge(int a)      { age = a; }
+    int getAge() const      {return age;}
+    void setColor(string c) {color = c;}
+    string getColor()
+    
 };
 
 
