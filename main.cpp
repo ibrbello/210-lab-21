@@ -1,3 +1,8 @@
+// COMSC-210 | Lab 21 | Ibrahim Bello
+// This program updates a default doubly linked list
+// class to have each node contain a goat object.
+
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -29,11 +34,17 @@ class Goat {
     Goat(int a, string c, string n) { age = a; color = c; name = n;}
 
     // Getters & Setters
-    void setAge(int a)      { age = a; }
+    void setAge(int a)      {age = a;}
     int getAge() const      {return age;}
     void setColor(string c) {color = c;}
-    string getColor()
-    
+    string getColor() const {return color;}
+    void setName(string n)  {name = n;}
+    string getName() const  {return name;} 
+
+    // print func
+    void print() {
+        cout << name << " ("
+    }
 };
 
 
@@ -41,11 +52,11 @@ class Goat {
 class DoublyLinkedList {
 private:
     struct Node {
-        int data;
+        Goat goat;
         Node* prev;
         Node* next;
-        Node(int val, Node* p = nullptr, Node* n = nullptr) {
-            data = val; 
+        Node(Goat g, Node* p = nullptr, Node* n = nullptr) {
+            goat = g;
             prev = p;
             next = n;
         }
@@ -58,8 +69,8 @@ public:
     // constructor
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
-    void push_back(int value) {
-        Node* newNode = new Node(value);
+    void push_back(Goat new_goat) {
+        Node* newNode = new Node(new_goat);
         if (!tail)  // if there's no tail, the list is empty
             head = tail = newNode;
         else {
@@ -69,8 +80,8 @@ public:
         }
     }
 
-    void push_front(int value) {
-        Node* newNode = new Node(value);
+    void push_front(Goat new_goat) {
+        Node* newNode = new Node(new_goat);
         if (!head)  // if there's no head, the list is empty
             head = tail = newNode;
         else {
@@ -80,13 +91,13 @@ public:
         }
     }
 
-    void insert_after(int value, int position) {
+    void insert_after(Goat new_goat, int position) {
         if (position < 0) { // input check
             cout << "Position must be >= 0." << endl;
             return;
         }
 
-        Node* newNode = new Node(value);
+        Node* newNode = new Node(new_goat);
         if (!head) { 
             head = tail = newNode;
             return;
@@ -110,30 +121,30 @@ public:
             tail = newNode; // Inserting at the end
         temp->next = newNode;
     }
+    // Function not used in updated program
+    // void delete_node(int value) {
+    //     if (!head) return; // Empty list
 
-    void delete_node(int value) {
-        if (!head) return; // Empty list
+    //     Node* temp = head;
+    //     while (temp && temp->data != value)
+    //         temp = temp->next;
 
-        Node* temp = head;
-        while (temp && temp->data != value)
-            temp = temp->next;
+    //     if (!temp) return; // Value not found
 
-        if (!temp) return; // Value not found
+    //     if (temp->prev) {
+    //         temp->prev->next = temp->next;
+    //     } else {
+    //         head = temp->next; // Deleting the head
+    //     }
 
-        if (temp->prev) {
-            temp->prev->next = temp->next;
-        } else {
-            head = temp->next; // Deleting the head
-        }
+    //     if (temp->next) {
+    //         temp->next->prev = temp->prev;
+    //     } else {
+    //         tail = temp->prev; // Deleting the tail
+    //     }
 
-        if (temp->next) {
-            temp->next->prev = temp->prev;
-        } else {
-            tail = temp->prev; // Deleting the tail
-        }
-
-        delete temp;
-    }
+    //     delete temp;
+    // }
 
     void print() {
         Node* current = head;
