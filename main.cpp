@@ -7,7 +7,7 @@
 #include <string>
 using namespace std;
 
-const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
+const int MIN_LS = 5, MAX_LS = 20;
 const int SIZE_ARR = 15, MIN_AGE = 1, MAX_AGE = 20;
 
 // Step 1: Goat class
@@ -43,7 +43,7 @@ class Goat {
 
     // print func
     void print() {
-        cout << name << " ("
+        cout << name << " (" << color << ", " << age << ")" << endl; 
     }
 };
 
@@ -148,9 +148,12 @@ public:
 
     void print() {
         Node* current = head;
-        if (!current) return;
+        if (!current) {
+            cout << "List is empty" << endl;
+            return;
+        }
         while (current) {
-            cout << current->data << " ";
+            current->goat.print();
             current = current->next;
         }
         cout << endl;
@@ -158,9 +161,12 @@ public:
 
     void print_reverse() {
         Node* current = tail;
-        if (!current) return;
+        if (!current) {
+            cout << "List is empty" << endl;
+            return;
+        }
         while (current) {
-            cout << current->data << " ";
+            current->goat.print();
             current = current->prev;
         }
         cout << endl;
@@ -177,11 +183,14 @@ public:
 
 // Driver program
 int main() {
+    srand(time(0));
     DoublyLinkedList list;
     int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
 
-    for (int i = 0; i < size; ++i)
-        list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
+    for (int i = 0; i < size; ++i) {
+        Goat randomGoat;
+        list.push_back(randomGoat);
+    }
     cout << "List forward: ";
     list.print();
 
